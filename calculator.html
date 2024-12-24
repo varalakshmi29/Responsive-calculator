@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Calculator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f7f7f7;
+        }
+
+        .calculator {
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: white;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            width: 260px;
+            align-items: center;
+        }
+
+        .display {
+            width: 100%;
+            padding: 10px;
+            text-align: right;
+            font-size: 2rem;
+            border: 1px solid #ccc;
+            margin-bottom: 20px;
+            background-color: #f5f5f5;
+            border-radius: 5px;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 20px;
+            font-size: 1.5rem;
+            border: none;
+            border-radius: 5px;
+            background-color: #f0f0f0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn:hover {
+            background-color: #e0e0e0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        #clear {
+            background-color: #ff4d4d;
+            color: white;
+        }
+
+        #clear:hover {
+            background-color: #ff1a1a;
+        }
+
+        #equal {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        #equal:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <input type="text" id="display" class="display" disabled>
+        <div class="buttons">
+            <button class="btn" id="clear">C</button>
+            <button class="btn">7</button>
+            <button class="btn">8</button>
+            <button class="btn">9</button>
+            <button class="btn">/</button>
+            <button class="btn">4</button>
+            <button class="btn">5</button>
+            <button class="btn">6</button>
+            <button class="btn">*</button>
+            <button class="btn">1</button>
+            <button class="btn">2</button>
+            <button class="btn">3</button>
+            <button class="btn">-</button>
+            <button class="btn">0</button>
+            <button class="btn">.</button>
+            <button class="btn" id="equal">=</button>
+            <button class="btn">+</button>
+        </div>
+    </div>
+
+    <script>
+        const display = document.getElementById('display');
+        const buttons = document.querySelectorAll('.btn');
+        const clearButton = document.getElementById('clear');
+        const equalButton = document.getElementById('equal');
+
+        // Add event listener for each button
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                if (button.id !== 'clear' && button.id !== 'equal') {
+                    display.value += button.textContent;
+                }
+            });
+        });
+
+        // Clear the display
+        clearButton.addEventListener('click', () => {
+            display.value = '';
+        });
+
+        // Evaluate the expression when "=" is clicked
+        equalButton.addEventListener('click', () => {
+            try {
+                display.value = eval(display.value);
+            } catch (e) {
+                display.value = 'Error';
+            }
+        });
+    </script>
+</body>
+</html>
